@@ -30,5 +30,7 @@ dependencies {
 
     // Add the jokes library
     compile project(':jokes')
-}
 
+    // Add the display joke library
+    compile project(':display_joke')
+}
