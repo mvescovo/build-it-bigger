@@ -40,8 +40,10 @@ dependencies {
     // Add the display joke library
     compile project(':display_joke')
 
+    // AdMob
+    freeCompile 'com.google.android.gms:play-services-ads:10.0.0'
+
     compile 'com.android.support:appcompat-v7:25.0.1'
-    compile 'com.google.android.gms:play-services-ads:10.0.0'
     compile 'com.google.code.findbugs:jsr305:2.0.1'
     compile project(path: ':jokes_backend', configuration: 'android-endpoints')
 }
