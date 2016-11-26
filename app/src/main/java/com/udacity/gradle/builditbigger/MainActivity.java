@@ -4,14 +4,34 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ProgressBar;
 
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends ActionBarActivity implements MainActivityFragment.Callback {
+
+    ProgressBar mProgressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        mProgressBar = (ProgressBar) findViewById(R.id.progress_bar);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        setProgressIndicator(false);
+    }
+
+    public void setProgressIndicator(boolean active) {
+        if (active) {
+            mProgressBar.setVisibility(View.VISIBLE);
+        } else {
+            mProgressBar.setVisibility(View.GONE);
+        }
     }
 
 
@@ -35,5 +55,10 @@ public class MainActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onJokeButtonClicked(boolean active) {
+        setProgressIndicator(active);
     }
 }

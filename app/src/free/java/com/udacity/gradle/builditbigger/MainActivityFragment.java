@@ -1,5 +1,6 @@
 package com.udacity.gradle.builditbigger;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -17,6 +18,7 @@ import com.google.android.gms.ads.InterstitialAd;
  */
 public class MainActivityFragment extends Fragment {
 
+    private Callback mCallback;
     private InterstitialAd mInterstitialAd;
 
     public MainActivityFragment() {
@@ -61,7 +63,22 @@ public class MainActivityFragment extends Fragment {
         mInterstitialAd.loadAd(adRequest);
     }
 
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        try {
+            mCallback = (Callback) context;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(context.toString() + " must implement Callback");
+        }
+    }
+
     private void tellJoke() {
+        mCallback.onJokeButtonClicked(true);
         new EndpointsAsyncTask().execute(getContext());
+    }
+
+    public interface Callback {
+        void onJokeButtonClicked(boolean active);
     }
 }
