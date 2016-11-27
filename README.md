@@ -15,6 +15,11 @@ An Android app to demonstrate product flavors and libraries.
     - stop the backend
 
 # Install
+To run the app in debug mode:
+
+- select "jokes_backend" in the run configuration menu and start the backend
+- when the backend is started you can run the app in debug mode
+
 To run the app in release mode:
 
 - generate a keystore and place it in the root of the project.
