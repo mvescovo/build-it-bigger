@@ -30,5 +30,6 @@ public class MainActivityConnectedTest {
     public void testGetJokeNotEmptyString() {
         onView(withId(R.id.tell_joke_button)).perform(click());
         onView(withId(R.id.joke)).check(matches(not(withText(""))));
+        onView(withId(R.id.joke)).check(matches(not(withText("connect timed out"))));
     }
 }

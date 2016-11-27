@@ -17,3 +17,24 @@ allprojects {
         jcenter()
     }
 }
+
+task startupDevBackend(dependsOn: 'jokes_backend:appengineRun') {
+    evaluationDependsOn ":jokes_backend"
+
+    project(":jokes_backend") {
+        appengine {
+            daemon true
+        }
+    }
+}
+
+task shutdownDevBackend(dependsOn: 'jokes_backend:appengineStop')
+
+task runTests(dependsOn: 'app:connectedCheck') {
+    finalizedBy shutdownDevBackend
+}
+
+// Tasks to start up GCE local development server, run all tests, then shutdown the server.
+task testsForGCE(dependsOn: 'startupDevBackend') {
+    finalizedBy runTests
+}
